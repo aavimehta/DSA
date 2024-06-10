@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) 
+    {
+       /* int actual_sum = (nums.size() * (nums.size() + 1)) / 2;
+        int obtained_sum = 0;
+
+        for(int i = 0; i < nums.size(); i++)
+        {
+            obtained_sum += nums[i];
+        }
+
+        return actual_sum - obtained_sum;*/
+
+
+        int xor1 = 0, xor2 = 0;
+        for(int i = 0; i < nums.size(); i++)
+        {
+            //will store XOR of all the elments of the array
+            xor1 = xor1 ^ nums[i];
+
+            //will store XOR of elements of 0 to n - 1
+            xor2 = xor2 ^ i;
+        }
+        
+        //Missing XOR with N is now added 
+        xor2 = xor2 ^ nums.size();
+
+        /*Elements present will cancel out to 0 and a number that is       
+        not present in array will be left without XORING and 
+        0 ^ NUMBER = NUMBER --> which is my missing number*/
+        return xor1 ^ xor2;
+    }
+};
